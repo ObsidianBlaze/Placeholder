@@ -1,10 +1,8 @@
-/**Read and manipulate the components as you please.
-Note: No functionality was bounded to the button.
-**/
-
 package placeholder;
 
 //importing the needed swing components.
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -12,7 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JFrame;
 import java.awt.event.MouseListener;
 
-public class Placeholder extends JFrame{
+public class Placeholder extends JFrame {
 
     JLabel label;
     JButton button;
@@ -34,9 +32,31 @@ public class Placeholder extends JFrame{
         textField = new JTextField("Input a text:");
         //Setting the label's size and position
         textField.setBounds(100, 200, 200, 200);
+
+        //Adding events to handle the logic of the placeholder.
+        textField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (textField.getText().equals("Input a text:")) {
+                    textField.setText("");
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+        });
         textField.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (textField.getText().equals("Input a text:")) {
+                    textField.setText("");
+                }
             }
 
             @Override
@@ -49,9 +69,7 @@ public class Placeholder extends JFrame{
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (textField.getText().equals("Input a text:")) {
-                    textField.setText("");
-                }
+
             }
 
             @Override
@@ -59,7 +77,6 @@ public class Placeholder extends JFrame{
                 if (textField.getText().equals("")) {
                     textField.setText("Input a text:");
                 }
-
             }
         });
 
