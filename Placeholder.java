@@ -1,6 +1,12 @@
+/*
+    Code written and maintained by Osas/ObsidianBlaze
+*/
+
 package placeholder;
 
 //importing the needed swing components.
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -9,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import java.awt.event.MouseListener;
+import java.awt.Color;
 
 public class Placeholder extends JFrame {
 
@@ -33,6 +40,29 @@ public class Placeholder extends JFrame {
         //Setting the label's size and position
         textField.setBounds(100, 200, 200, 200);
 
+        //Using Focus Listeners.
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                textField.setForeground(Color.BLACK);
+                if (textField.getText().equals("Input a text:")) {
+                    textField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().equals("")) {
+                    textField.setText("Input a text:");
+                    textField.setForeground(Color.gray);
+                }
+            }
+        });
+
+        /*
+        
+        Uncomment this to use mouse and key listeners.
+        
         //Adding events to handle the logic of the placeholder.
         textField.addKeyListener(new KeyListener() {
             @Override
@@ -80,6 +110,7 @@ public class Placeholder extends JFrame {
             }
         });
 
+         */
         //Setting the layout.
         setLayout(null);
         //Adding the title of the frame.
